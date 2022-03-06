@@ -1,0 +1,137 @@
+@charset 'utf-8';
+
+html {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+
+}
+
+body {
+    /* 가로 스크롤을 없애기 위해서 */
+    overflow-x: hidden;
+    color: rgb(29,29,31);
+    letter-spacing: -0.05em; /* 자간 줄이기 */
+    background: white;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* 현재 만드는 사이트 처럼 링크에 모두 밑줄이 없는 경우에는 이렇게 설정해도 좋음. */
+a {
+    color: rgb(29,29,31);
+    text-decoration: none;
+}
+/* 여기까지 리셋부분 */
+
+/* 여기서부터 우리 디자인 */
+.global-nav {
+    height: 44px; /* 위에 메뉴 부분에 높이 간격이 존재 */
+}
+
+.local-nav {
+    height: 52px;
+    border-bottom: 1px solid #ddd; /* 테두리 아래쪽 속성을 일괄적으로 설정, 테두리 두께-solid(실선 등 선의 종류)-색상 */
+}
+
+
+/*
+
+flex 체크
+: flex 는 레이아웃 배치 전용 기능으로 고안, 그래서 float / inline-block 등을 이용한 기존 방식보다 훨씬 강력하고 편리함
+: flex 의 속성들은, 컨테이너에 적용하는 속성 | 아이템에 적용하는 속성 이 존재.
+: display: flex; - block 속성은 width 100% 로 되고, flex 는 딱 내용물의 width 만큼만.
+: flex 아이템들은 가로 방향으로 배치되고, 자신이 가진 내용물의 width 만큼만 차지하게 됨.
+: float 와는 다르게 flex 는 마치 inline 요소들 처럼 height 는 컨테이너(전체를 감싸고 있는)의 높이만큼 늘어남. 
+: height 가 알아서 늘어나는 특징은 레이아웃을 만들 때 아주 편리함.
+: inline-flex 는 block 과 inline-block 의 관계 생각하면 됨. 아이템의 배치와 관련이 있기보다는 컨테이너가 주변 요소들과 어떻게 어우러질지 결정하는 값.
+: inline-flex 는 inline-block 처럼 동작함.
+: 아이템들이 배치된 방향의 축을 메인축, 메인축과 수직인 축을 수직축 또는 교차축이라고 불름.
+: 오뎅(flex 아이템)들이 꼬치(메인축)을 따라 쭉 꽂혀서 정렬된 상태를 생각하면 됨.
+
+flex 배치 방향 설정 (flex-direction)
+: 아이템들이 배치되는 축의 방향을 결정하는 속성 - 메인축(오뎅꼬치)의 방향을 가로로 할거냐 세로로 할거냐를 정해주는 것.
+: row(왼쪽부터 정렬 : 기본값 : 아이템들이 행(가로) 방향으로 배치됨), row-reverse(오른쪽부터 정렬 : 아이템들이 역순으로 가로 배치 됨.), 
+: column(상단부터 정렬 : 아이템들이 열(세로) 방향으로 배치됨), column-reverse(하단부터 정렬 : 아이템들이 역순으로 세로 배치됨.)
+: 크기가 작은 모바일 기기에서 column 으로 배치하다가 일정 폭 이상이 되면 row 로 바꿔주는 식으로 반응형을 구현할 수 있음.
+
+flex-wrap : 줄넘김 처리 설정
+: 컨테이너가 더 이상 아이템들을 한 줄에 담을 여유 공간이 없을 때 아이템 줄바꿈을 어떻게 할지 결정하는 속성
+: nowrap(기본값, 줄바꿈 없고 그냥 잘림)
+: wrap(공간이 없으면 맨 오른쪽 아이템이 밑으로 내려감 : float 나 inline-block 으로 배치한 요소들과 비슷하게 동작)
+: wrap-reverse(공간이 없으면 맨 오른쪽 아이템이 위로 올라감 : 아이템을 역순으로 배치)
+
+flex-flow : flex-direction과 flex-wrap 을 한번에 지정할 수 있는 단축 속성
+: felx-direction, flex-wrap 순으로 한 칸 떼고 써주면 됨. ex) flex-flow: row wrap;
+: 여기서 기억해야 할 것 : justify 는 메인축(오뎅꼬치) 방향으로 정렬, align 은 수직축(오뎅을 뜯어내는) 방향으로 정렬
+
+메인축 방향 정렬 justify-content 속성
+: flex-start(기본값) - 아이템들을 시작점으로 정렬, flex-diretion 이 row(가로배치)일 때는 왼쪽, column(세로 배치)일 때는 위
+: flex-end : 아이템들을 끝점으로 정렬, flex-direction 이 row 일 때는 오른쪽, column 일 때는 아래
+: center : 아이템들을 한번에 가운데 정렬
+: space-between = 아이템들의 사이에 균일한 간격을 만들어줌
+: space-around = 아이템들의 둘레에 균일한 간격을 만들어줌
+: space-evenly = 아이템들의 사이와 양 끝에 균일한 간격을 만들어 줌. -> 주의해야 할 점이 IE 와 Edge 에서는 지원 X
+
+-> 이외 세로 정렬 등의 내용은 https://studiomeal.com/archives/197 에서 더 읽어보기
+*/
+
+/* global-nav-links 와 local-nav-links 는 거의 겹치므로 일단 공통으로 설정해줌. */
+.global-nav-links, .local-nav-links {
+    /* flex 속성으로 가운데 정렬해주고, justify-content로 똑같은 간격으로 설정해주기. */
+    display: flex;
+    /* align 으로 세로로 가운데 정렬 */
+    align-items: center; /*이렇게만 설정하면 변동이 없는 이유는 golabl-nav-links 에는 height 가 딱 글자만큼 늘어나있기 때문.*/
+    height: 100%; /* 부모 클래스에 맞춰서 늘어나도록(44px) 100% 로 설정하면 위의 align 세로 가운데 정렬이 됨. */
+    /* width 가 정해져(제한) 있고, 센터 정렬, 최대 폭 1000px : 만약 크기가 작아지면 자연스럽게 다 작아질 수 있도록 */
+    max-width: 1000px;
+    margin: 0 auto; /* 왼쪽 오른쪽 마진 auto 로 하면 센터 정렬 됨*/
+
+}
+
+/* 여기에 local-nav-links 와 다른 속성을 설정해줌. */
+.global-nav-links {
+    justify-content: space-between; /* 아이템들 사이에 균일한 간격을 만들어줌. */
+}
+
+/* product-name 으로 따로 떨어져 있는 AirMug Pro 는 오른쪽에 빈 공간이 있고, 다른 메뉴들이 나오는 것, 
+그래서 오른쪽 margin 을 auto 로 해주는 것이 가장 쉬운 방법 */
+/* margin 에 auto 가 들어가면 내가 가질 수 있는 여백을 다 소비를 하는 것. 
+그래서 센터 정렬할 때 margin : left, right 를 auto 로 하는 이유는 왼쪽 오른쪽 모든 공간을 다 소비해서 가운데 정렬이 된다는 것임. */
+.product-name {
+    margin-right: auto;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+/* not 을 사용하면 그 대상의 여집합에만 설정을 적용할 수 있음. */
+.local-nav-links a:not(.product-name) {
+    margin-left: 2em;
+    font-size: 0.8rem;
+}
+
+/* 위에 두 개 다른 방법 : 강사님 방법 */
+.local-nav-links .product-name {
+    margin-right: auto;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.local-nav-links {
+    font-size: 0.8rem;
+}
+
+.local-nav-links a:not(.product-name) {
+    margin-left: 2em;
+}
+
+
+
+
+
+
+
+
+
+
