@@ -1,0 +1,101 @@
+
+/* 여기까지가 CSS 초기화 */
+
+#bottom1  {
+	animation-duration: 3s;
+  	animation-name: slidein2;
+}
+
+#bottom2 {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+	from {
+		margin-left: 100%;
+		width: 300%
+	}
+	to {
+    	margin-left: 0%;
+    	width: 100%;
+  	}
+}
+
+@keyframes slidein2 {
+	from {
+		margin-left: -300%;
+		width: -100%
+	}
+	to {
+    	margin-left: 0%;
+    	width: 100%;
+  	}
+}
+
+html {
+	overflow-x: hidden; 
+	/*overflow-y: hidden;*/
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+a{
+	text-decoration-line: none;
+	color: white;
+}
+
+/* 여기부터 CSS 속성 설정 */
+
+.part1 {
+	/*margin: 0px; -> 왜 저기가 계속 띄어져 있을까?*/
+	/*position: fixed;*/
+	background-color:rgba(17, 54, 129, 1.0);
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-between;
+	height: 90px;
+	text-align: center;
+	width: 100%;
+	margin: 0 5px;
+	/* 왜 수직정렬이 안될까? */
+}
+
+.part1 left {
+	vertical-align: middle;
+	/* 왜 수직정렬이 안될까? */
+}
+
+.part1 middle {
+	vertical-align: middle;
+	/* 왜 수직정렬이 안될까? */
+}
+
+.part1 right {
+	vertical-align: middle;
+	/* 왜 수직정렬이 안될까? */
+}
+
+.part2 {
+	/*display: inline-block;*/
+	width: 100%;
+}
+
+.part3 {
+	text-align: center;
+}
+
+.part4 {
+	width: 100%;
+	background-color:rgba(254, 252, 245, 1.0);
+}
